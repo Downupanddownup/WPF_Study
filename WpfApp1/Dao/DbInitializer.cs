@@ -23,7 +23,7 @@ namespace WpfApp1.Dao
             {
                 connection.Open();
                 // 如果表 a 不存在，则创建它
-                connection.Execute("CREATE TABLE IF NOT EXISTS a (name TEXT NOT NULL);");
+                connection.Execute("CREATE TABLE IF NOT EXISTS a (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);");
             }
         }
     }

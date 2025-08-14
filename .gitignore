@@ -15,3 +15,6 @@ packages/
 
 # ReSharper 临时文件
 _ReSharper.*/
+
+
+WpfApp1/MyDatabase.db

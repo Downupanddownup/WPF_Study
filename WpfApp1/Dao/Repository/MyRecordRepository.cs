@@ -20,7 +20,7 @@ namespace WpfApp1.Dao.Repository
 
         public List<MyRecord> GetAll()
         {
-            const string sql = "SELECT name FROM a;";
+            const string sql = "SELECT id as Id, name FROM a;";
             using (var connection = _connectionFactory.CreateConnection())
             {
                 return connection.Query<MyRecord>(sql).ToList();
@@ -33,6 +33,33 @@ namespace WpfApp1.Dao.Repository
             using (var connection = _connectionFactory.CreateConnection())
             {
                 connection.Execute(sql, record);
+            }
+        }
+
+        public void Update(int id, MyRecord record)
+        {
+            const string sql = "UPDATE a SET name = @Name WHERE id = @Id;";
+            using (var connection = _connectionFactory.CreateConnection())
+            {
+                connection.Execute(sql, new { Name = record.Name, Id = id });
+            }
+        }
+
+        public void Delete(int id)
+        {
+            const string sql = "DELETE FROM a WHERE id = @Id;";
+            using (var connection = _connectionFactory.CreateConnection())
+            {
+                connection.Execute(sql, new { Id = id });
+            }
+        }
+
+        public List<MyRecord> Search(string name)
+        {
+            const string sql = "SELECT id as Id, name FROM a WHERE name LIKE @Name;";
+            using (var connection = _connectionFactory.CreateConnection())
+            {
+                return connection.Query<MyRecord>(sql, new { Name = $"%{name}%" }).ToList();
             }
         }
     }
