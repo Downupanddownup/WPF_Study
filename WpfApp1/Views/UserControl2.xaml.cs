@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace WpfApp1.Views
 {
     /// <summary>
-    /// UserControl1.xaml 的交互逻辑
+    /// UserControl2.xaml 的交互逻辑
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class UserControl2 : UserControl
     {
-        public UserControl1()
+        public UserControl2()
         {
             InitializeComponent();
         }

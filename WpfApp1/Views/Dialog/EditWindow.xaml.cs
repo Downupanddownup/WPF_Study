@@ -1,7 +1,7 @@
 using System.Windows;
 using WpfApp1.Bean;
 
-namespace WpfApp1
+namespace WpfApp1.Views.Dialog
 {
     public partial class EditWindow : Window
     {

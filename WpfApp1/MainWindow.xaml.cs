@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Enums;
+using WpfApp1.Views;
 
 namespace WpfApp1
 {
@@ -38,7 +39,7 @@ namespace WpfApp1
                     _pageType = PageType.PAGE2;
                     break;
                 case PageType.PAGE3:
-                    ShowContent.Content = new SubPage.UserControl3();
+                    ShowContent.Content = new UserControl3();
                     _pageType = PageType.PAGE3;
                     break;
             }

@@ -16,8 +16,9 @@ using System.Windows.Shapes;
 using WpfApp1.Bean;
 using WpfApp1.Dao;
 using WpfApp1.Dao.Repository;
+using WpfApp1.Views.Dialog;
 
-namespace WpfApp1.SubPage
+namespace WpfApp1.Views
 {
     /// <summary>
     /// UserControl3.xaml 的交互逻辑
