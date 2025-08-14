@@ -1,0 +1,17 @@
+# Visual Studio 忽略文件
+.vs/
+*.suo
+*.user
+*.bak
+*.log
+
+# 编译生成的文件
+[Bb]in/
+[Oo]bj/
+
+# NuGet 包
+packages/
+*.nupkg
+
+# ReSharper 临时文件
+_ReSharper.*/
