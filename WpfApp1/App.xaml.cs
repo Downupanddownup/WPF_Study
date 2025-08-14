@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 using WpfApp1.Dao;
 using WpfApp1.Dao.Repository;
+using WpfApp1.Service;
 
 namespace WpfApp1
 {
@@ -22,6 +23,7 @@ namespace WpfApp1
             services.AddSingleton<DbConnectionFactory>();
             services.AddSingleton<DbInitializer>();
             services.AddTransient<MyRecordRepository>();
+            services.AddTransient<MyRecordService>();
 
             ServiceProvider = services.BuildServiceProvider();
 

@@ -14,8 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Bean;
-using WpfApp1.Dao;
-using WpfApp1.Dao.Repository;
+using WpfApp1.Service;
 using WpfApp1.Views.Dialog;
 
 namespace WpfApp1.Views
@@ -25,14 +24,14 @@ namespace WpfApp1.Views
     /// </summary>
     public partial class UserControl3 : UserControl
     {
-        private readonly MyRecordRepository _recordRepository;
+        private readonly MyRecordService _recordService;
         
         public UserControl3()
         {
             InitializeComponent();
 
             // 从DI容器中获取服务实例
-            _recordRepository = App.ServiceProvider.GetRequiredService<MyRecordRepository>();
+            _recordService = App.ServiceProvider.GetRequiredService<MyRecordService>();
 
             LoadData();
         }
@@ -41,7 +40,7 @@ namespace WpfApp1.Views
         {
             try
             {
-                var records = _recordRepository.GetAll();
+                var records = _recordService.GetAllRecords();
                 RecordsDataGrid.ItemsSource = records;
             }
             catch (Exception ex)
@@ -55,15 +54,8 @@ namespace WpfApp1.Views
             try
             {
                 string searchText = SearchTextBox.Text?.Trim();
-                if (string.IsNullOrEmpty(searchText))
-                {
-                    LoadData();
-                }
-                else
-                {
-                    var records = _recordRepository.Search(searchText);
-                    RecordsDataGrid.ItemsSource = records;
-                }
+                var records = _recordService.SearchRecords(searchText);
+                RecordsDataGrid.ItemsSource = records;
             }
             catch (Exception ex)
             {
@@ -86,10 +78,14 @@ namespace WpfApp1.Views
                 
                 if (editWindow.ShowDialog() == true && editWindow.IsConfirmed)
                 {
-                    _recordRepository.Insert(editWindow.Record);
+                    _recordService.CreateRecord(editWindow.Record);
                     LoadData();
                     MessageBox.Show("新增成功!", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "输入错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
@@ -108,11 +104,15 @@ namespace WpfApp1.Views
                     
                     if (editWindow.ShowDialog() == true && editWindow.IsConfirmed)
                     {
-                        _recordRepository.Update(record.Id, editWindow.Record);
+                        _recordService.UpdateRecord(record.Id, editWindow.Record);
                         LoadData();
                         MessageBox.Show("修改成功!", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "输入错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
@@ -131,11 +131,15 @@ namespace WpfApp1.Views
                     
                     if (result == MessageBoxResult.Yes)
                     {
-                        _recordRepository.Delete(record.Id);
+                        _recordService.DeleteRecord(record.Id);
                         LoadData();
                         MessageBox.Show("删除成功!", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "输入错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception ex)
             {
